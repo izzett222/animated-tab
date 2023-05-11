@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 function App() {
   const itemsRef = useRef<HTMLLIElement[]>([]);
   const parentRef = useRef<HTMLUListElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
   const [properties, setProperties] = useState<[number, number]>([0, 0]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (itemsRef.current.length > 0) {
       const width = itemsRef.current[0].getBoundingClientRect().width;
+      barRef.current!.style.width = `${width}px`;
+      barRef.current!.style.transform = `translateX(0px)`;
       const offset = 0;
       setProperties([width, offset]);
     }
@@ -65,9 +67,10 @@ function App() {
           {listItemsNodes}
         </ul>
         <motion.div
+        ref={barRef}
           animate={{ x: properties[1], width: properties[0] }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="w-min h-1 bg-red-500"
+          className="h-1 bg-red-500"
         ></motion.div>
       </div>
     </div>

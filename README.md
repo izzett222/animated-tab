@@ -1,5 +1,5 @@
 # Animated Tab
-A simple animated tab with framer motion
+A simple animated tab([codepen](https://codepen.io/alisyahidin/pen/XWxEMEL)) with framer motion
 
 ## Getting Started with Create React App
 
